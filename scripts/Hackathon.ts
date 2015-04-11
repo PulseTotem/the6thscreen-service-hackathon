@@ -49,5 +49,5 @@ var _HackathonListeningPort : number = process.env.PORT || 6008;
  */
 var _HackathonArguments : Array<string> = process.argv;
 
-var serverInstance = new Facebook(_HackathonListeningPort, _HackathonArguments);
+var serverInstance = new Hackathon(_HackathonListeningPort, _HackathonArguments);
 serverInstance.run();
