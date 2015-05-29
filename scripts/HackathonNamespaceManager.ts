@@ -31,6 +31,7 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 	constructor(socket : any) {
 		super(socket);
 		this.addListenerToSocket('PublicEvents', this.retrievePublicEvents);
+		this.addListenerToSocket('PandaVideo', this.retrievePandaVideo);
 	}
 
 	retrievePublicEvents(params : any, self : HackathonNamespaceManager = null) {
@@ -68,6 +69,34 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 
 					self.sendNewInfoToClient(eventList);
 				});
+			}
+		});
+	}
+
+	retrievePandaVideo(params : any, self : HackathonNamespaceManager = null) {
+		if (self == null) {
+			self = this;
+		}
+
+		Logger.debug("retrievePandaVideo Action with params :");
+		Logger.debug(params);
+
+		var fail = function(error) {
+			if(error) {
+				Logger.error(error);
+			}
+		};
+
+		request(params.url, function (error, response, body) {
+			if (!error && response.statusCode == 200) {
+
+				var playlist = new VideoPlaylist(uuid.v1());
+				for (urlKey in body) {
+				   var url = new VideoURL(uuid.v1());
+					url.setURL(body[urlKey]);
+					playlist.addVideo(url);
+				}
+				self.sendNewInfoToClient(playlist);
 			}
 		});
 	}
