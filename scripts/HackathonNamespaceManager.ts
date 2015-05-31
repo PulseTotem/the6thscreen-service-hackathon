@@ -73,7 +73,7 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 		});
 	}
 
-	retrievePandaVideo(params : any, self : HackathonNamespaceManager = null) {
+	retrieveVideoFromJSON(params : any, self : HackathonNamespaceManager = null) {
 		if (self == null) {
 			self = this;
 		}
@@ -92,9 +92,16 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 
 				var playlist = new VideoPlaylist(uuid.v1());
 				for (urlKey in body) {
-				   var url = new VideoURL(uuid.v1());
-					url.setURL(body[urlKey]);
-					playlist.addVideo(url);
+					var info = body[urlKey];
+				   var video = new VideoURL(uuid.v1());
+					video.setURL(info.url);
+					video.setDurationToDisplay(info.duration);
+					if (info.type == "dailymotion") {
+						video.setType(VideoType.DAILYMOTION);
+					} else {
+						video.setType(VideoType.HTML5)
+					}
+					playlist.addVideo(video);
 				}
 				self.sendNewInfoToClient(playlist);
 			}

@@ -1,13 +1,57 @@
 [
-  "http://www.the6thscreen.fr/pandaVideo/Panda-events-aftermovie-2014.mp4",
-  "http://www.the6thscreen.fr/pandaVideo/PE14-Aftermovie-6aout.mp4",
-  "http://www.the6thscreen.fr/pandaVideo/PE14-Aftermovie-17juillet.mp4",
-  "http://www.the6thscreen.fr/pandaVideo/PE14-Aftermovie-10juillet.mp4",
-  "http://www.the6thscreen.fr/pandaVideo/MZ14-Aftermovie.mp4",
-  "http://www.the6thscreen.fr/pandaVideo/Dunes_2015_v1_comp.mov",
-  "http://www.the6thscreen.fr/pandaVideo/Dunes-Electros-Aftermovie2014.mp4",
-  "http://www.the6thscreen.fr/pandaVideo/Crossover-2014-AfterMovie.mp4",
-  "http://www.the6thscreen.fr/pandaVideo/PE14-Closing-14aout.mp4",
-  "http://www.the6thscreen.fr/pandaVideo/PE14-aftermovie.mp4",
-  "http://www.the6thscreen.fr/pandaVideo/PE14-Aftermovie-30juillet.mp4"
+  {
+    "url": "http://www.the6thscreen.fr/pandaVideo/Panda-events-aftermovie-2014.mp4",
+    "duration": 121,
+    "type": "html5"
+  },
+  {
+    "url": "http://www.the6thscreen.fr/pandaVideo/PE14-Aftermovie-6aout.mp4",
+    "duration": 140,
+    "type": "html5"
+  },
+  {
+    "url": "http://www.the6thscreen.fr/pandaVideo/PE14-Aftermovie-17juillet.mp4",
+    "duration": 140,
+    "type": "html5"
+  },
+  {
+    "url": "http://www.the6thscreen.fr/pandaVideo/PE14-Aftermovie-10juillet.mp4",
+    "duration": 140,
+    "type": "html5"
+  },
+  {
+    "url": "http://www.the6thscreen.fr/pandaVideo/MZ14-Aftermovie.mp4",
+    "duration": 180,
+    "type": "html5"
+  },
+  {
+    "url": "http://www.the6thscreen.fr/pandaVideo/Dunes_2015_v1_comp.mov",
+    "duration": 171,
+    "type": "html5"
+  },
+  {
+    "url": "http://www.the6thscreen.fr/pandaVideo/Dunes-Electros-Aftermovie2014.mp4",
+    "duration": 253,
+    "type": "html5"
+  },
+  {
+    "url": "http://www.the6thscreen.fr/pandaVideo/Crossover-2014-AfterMovie.mp4",
+    "duration": 428,
+    "type": "html5"
+  },
+  {
+    "url": "http://www.the6thscreen.fr/pandaVideo/PE14-Closing-14aout.mp4",
+    "duration": 140,
+    "type": "html5"
+  },
+  {
+    "url": "http://www.the6thscreen.fr/pandaVideo/PE14-aftermovie.mp4",
+    "duration": 140,
+    "type": "html5"
+  },
+  {
+    "url": "http://www.the6thscreen.fr/pandaVideo/PE14-Aftermovie-30juillet.mp4",
+    "duration": 140,
+    "type": "html5"
+  }
 ]
