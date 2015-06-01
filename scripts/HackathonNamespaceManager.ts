@@ -105,11 +105,15 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 					limit = bodyJSON.length;
 				}
 
+				var totalDuration = 0;
 				for (var i = 0; i < limit; i++) {
 					var info = bodyJSON[i];
 				   var video = new VideoURL(uuid.v1());
 					video.setURL(info.url);
 					video.setDurationToDisplay(info.duration);
+
+					totalDuration += info.duration;
+
 					if (info.type == "dailymotion") {
 						video.setType(VideoType.DAILYMOTION);
 					} else {
@@ -117,6 +121,8 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 					}
 					playlist.addVideo(video);
 				}
+
+				playlist.setDurationToDisplay(totalDuration);
 				self.sendNewInfoToClient(playlist);
 			}
 		});
@@ -147,6 +153,11 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 					limit = bodyJSON.length;
 				}
 
+				var infoDuration = parseInt(params.InfoDuration);
+
+				var totalDuration = limit*infoDuration;
+				album.setDurationToDisplay(totalDuration);
+
 				for (var i = 0; i < limit; i++) {
 					var info = bodyJSON[i];
 					var picture = new Picture(uuid.v1());
@@ -159,7 +170,7 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 					picture.setTitle(info.name);
 					picture.setMedium(picMedium);
 					picture.setOriginal(picMedium);
-					picture.setDurationToDisplay(parseInt(params.InfoDuration));
+					picture.setDurationToDisplay(infoDuration);
 
 					album.addPicture(picture);
 				}
