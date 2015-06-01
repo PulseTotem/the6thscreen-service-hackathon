@@ -47,6 +47,17 @@ module.exports = function (grunt) {
                     'devDependencies',
                     'overrides'
                 ]
+            },
+            packageHeroku: {
+              src: ['t6s-core/core-backend/package.json'],
+              dest: 'heroku/package.json',
+              fields: [
+                'name',
+                'version',
+                'dependencies',
+                'devDependencies',
+                'overrides'
+              ]
             }
         },
 // ---------------------------------------------
