@@ -99,7 +99,7 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 				var bodyJSON = JSON.parse(body);
 				var playlist = new VideoPlaylist(uuid.v1());
 
-				var limit = params.Limit;
+				var limit = parseInt(params.Limit);
 
 				if (bodyJSON.length < limit) {
 					limit = bodyJSON.length;
@@ -109,7 +109,7 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 					var info = bodyJSON[i];
 				   var video = new VideoURL(uuid.v1());
 					video.setURL(info.url);
-					video.setDurationToDisplay(info.duration*1000);
+					video.setDurationToDisplay(info.duration);
 					if (info.type == "dailymotion") {
 						video.setType(VideoType.DAILYMOTION);
 					} else {
@@ -120,7 +120,7 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 				self.sendNewInfoToClient(playlist);
 			}
 		});
-	};
+	}
 
 	retrievePictureAlbumFromJSON(params : any, self : HackathonNamespaceManager = null) {
 		if (self == null) {
@@ -141,7 +141,7 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 				var bodyJSON = JSON.parse(body);
 				var album = new PictureAlbum(uuid.v1());
 
-				var limit = params.Limit;
+				var limit = parseInt(params.Limit);
 
 				if (bodyJSON.length < limit) {
 					limit = bodyJSON.length;
@@ -150,15 +150,16 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 				for (var i = 0; i < limit; i++) {
 					var info = bodyJSON[i];
 					var picture = new Picture(uuid.v1());
-					var picOriginal = new PictureURL(uuid.v1());
+					var picMedium = new PictureURL(uuid.v1());
 
-					picOriginal.setURL(info.url);
-					picOriginal.setHeight(info.height);
-					picOriginal.setWidth(info.width);
+					picMedium.setURL(info.url);
+					picMedium.setHeight(info.height);
+					picMedium.setWidth(info.width);
 
 					picture.setTitle(info.name);
-					picture.setOriginal(picOriginal);
-					picture.setDurationToDisplay(params.InfoDuration);
+					picture.setMedium(picMedium);
+					picture.setOriginal(picMedium);
+					picture.setDurationToDisplay(parseInt(params.InfoDuration));
 
 					album.addPicture(picture);
 				}
