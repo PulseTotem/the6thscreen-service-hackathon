@@ -8,8 +8,11 @@
 
 /// <reference path="../t6s-core/core-backend/scripts/server/SourceNamespaceManager.ts" />
 
-/// <reference path="../t6s-core/core-backend/t6s-core/core/scripts/infotype/EventList.ts" />
+/// <reference path="../t6s-core/core-backend/t6s-core/core/scripts/infotype/VideoType.ts" />
+/// <reference path="../t6s-core/core-backend/t6s-core/core/scripts/infotype/VideoURL.ts" />
+/// <reference path="../t6s-core/core-backend/t6s-core/core/scripts/infotype/VideoPlaylist.ts" />
 /// <reference path="../t6s-core/core-backend/t6s-core/core/scripts/infotype/CityEvent.ts" />
+/// <reference path="../t6s-core/core-backend/t6s-core/core/scripts/infotype/EventList.ts" />
 
 var datejs : any = require('datejs');
 
@@ -31,7 +34,7 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 	constructor(socket : any) {
 		super(socket);
 		this.addListenerToSocket('PublicEvents', this.retrievePublicEvents);
-		this.addListenerToSocket('PandaVideo', this.retrievePandaVideo);
+		this.addListenerToSocket('RetrieveVideoFromJSON', this.retrieveVideoFromJSON);
 	}
 
 	retrievePublicEvents(params : any, self : HackathonNamespaceManager = null) {
@@ -87,15 +90,16 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 			}
 		};
 
-		request(params.url, function (error, response, body) {
+		request(params.FeedURL, function (error, response, body) {
 			if (!error && response.statusCode == 200) {
-
+				var bodyJSON = JSON.parse(body);
 				var playlist = new VideoPlaylist(uuid.v1());
-				for (urlKey in body) {
-					var info = body[urlKey];
+
+				for (var urlKey in bodyJSON) {
+					var info = bodyJSON[urlKey];
 				   var video = new VideoURL(uuid.v1());
 					video.setURL(info.url);
-					video.setDurationToDisplay(info.duration);
+					video.setDurationToDisplay(info.duration*1000);
 					if (info.type == "dailymotion") {
 						video.setType(VideoType.DAILYMOTION);
 					} else {
