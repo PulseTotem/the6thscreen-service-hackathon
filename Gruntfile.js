@@ -88,7 +88,7 @@ module.exports = function (grunt) {
                 src: [
                     'scripts/**/*.ts'
                 ],
-                dest: 'build/js/service.js'
+                dest: 'build/js/Service.js'
             },
             test: {
                 src: [
@@ -104,7 +104,7 @@ module.exports = function (grunt) {
             },
             build: {
                 options: {
-                    script: 'build/js/service.js',
+                    script: 'build/js/Service.js',
                     args: ["loglevel=debug"]
                 }
             }
@@ -116,7 +116,7 @@ module.exports = function (grunt) {
 // ---------------------------------------------
         watch: {
             express: {
-                files:  [ 'build/js/service.js' ],
+                files:  [ 'build/js/Service.js' ],
                 tasks:  [ 'express:build' ],
                 options: {
                     spawn: false
