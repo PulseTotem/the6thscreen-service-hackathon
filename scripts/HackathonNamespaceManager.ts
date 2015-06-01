@@ -13,13 +13,16 @@
 /// <reference path="../t6s-core/core-backend/t6s-core/core/scripts/infotype/VideoPlaylist.ts" />
 /// <reference path="../t6s-core/core-backend/t6s-core/core/scripts/infotype/CityEvent.ts" />
 /// <reference path="../t6s-core/core-backend/t6s-core/core/scripts/infotype/EventList.ts" />
+/// <reference path="../t6s-core/core-backend/t6s-core/core/scripts/infotype/PictureAlbum.ts" />
+/// <reference path="../t6s-core/core-backend/t6s-core/core/scripts/infotype/Picture.ts" />
+/// <reference path="../t6s-core/core-backend/t6s-core/core/scripts/infotype/PictureURL.ts" />
 
 var datejs : any = require('datejs');
 
 var DateJS : any = <any>Date;
 var uuid : any = require('node-uuid');
-var fs : any = require('fs');
-var xml2js : any = require('xml2js');
+//var fs : any = require('fs');
+//var xml2js : any = require('xml2js');
 var request : any = require("request");
 var util = require('util');
 
@@ -33,11 +36,12 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 	 */
 	constructor(socket : any) {
 		super(socket);
-		this.addListenerToSocket('PublicEvents', this.retrievePublicEvents);
+		//this.addListenerToSocket('PublicEvents', this.retrievePublicEvents);
 		this.addListenerToSocket('VideoFromJSON', this.retrieveVideoFromJSON);
+		this.addListenerToSocket('PictureAlbumFromJSON', this.retrievePictureAlbumFromJSON);
 	}
 
-	retrievePublicEvents(params : any, self : HackathonNamespaceManager = null) {
+	/*retrievePublicEvents(params : any, self : HackathonNamespaceManager = null) {
 		if (self == null) {
 			self = this;
 		}
@@ -74,14 +78,14 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 				});
 			}
 		});
-	}
+	}*/
 
 	retrieveVideoFromJSON(params : any, self : HackathonNamespaceManager = null) {
 		if (self == null) {
 			self = this;
 		}
 
-		Logger.debug("retrievePandaVideo Action with params :");
+		Logger.debug("retrieveVideoFromJSON Action with params :");
 		Logger.debug(params);
 
 		var fail = function(error) {
@@ -90,13 +94,19 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 			}
 		};
 
-		request(params.FeedURL, function (error, response, body) {
+		request(params.URL, function (error, response, body) {
 			if (!error && response.statusCode == 200) {
 				var bodyJSON = JSON.parse(body);
 				var playlist = new VideoPlaylist(uuid.v1());
 
-				for (var urlKey in bodyJSON) {
-					var info = bodyJSON[urlKey];
+				var limit = params.Limit;
+
+				if (bodyJSON.length < limit) {
+					limit = bodyJSON.length;
+				}
+
+				for (var i = 0; i < limit; i++) {
+					var info = bodyJSON[i];
 				   var video = new VideoURL(uuid.v1());
 					video.setURL(info.url);
 					video.setDurationToDisplay(info.duration*1000);
@@ -108,6 +118,51 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 					playlist.addVideo(video);
 				}
 				self.sendNewInfoToClient(playlist);
+			}
+		});
+	};
+
+	retrievePictureAlbumFromJSON(params : any, self : HackathonNamespaceManager = null) {
+		if (self == null) {
+			self = this;
+		}
+
+		Logger.debug("retrievePictureAlbumFromJSON Action with params :");
+		Logger.debug(params);
+
+		var fail = function(error) {
+			if(error) {
+				Logger.error(error);
+			}
+		};
+
+		request(params.URL, function (error, response, body) {
+			if (!error && response.statusCode == 200) {
+				var bodyJSON = JSON.parse(body);
+				var album = new PictureAlbum(uuid.v1());
+
+				var limit = params.Limit;
+
+				if (bodyJSON.length < limit) {
+					limit = bodyJSON.length;
+				}
+
+				for (var i = 0; i < limit; i++) {
+					var info = bodyJSON[i];
+					var picture = new Picture(uuid.v1());
+					var picOriginal = new PictureURL(uuid.v1());
+
+					picOriginal.setURL(info.url);
+					picOriginal.setHeight(info.height);
+					picOriginal.setWidth(info.width);
+
+					picture.setTitle(info.name);
+					picture.setOriginal(picOriginal);
+					picture.setDurationToDisplay(params.InfoDuration);
+
+					album.addPicture(picture);
+				}
+				self.sendNewInfoToClient(album);
 			}
 		});
 	}

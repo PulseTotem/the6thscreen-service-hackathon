@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Autobleue",
+    "url": "http://www.the6thscreen.fr/pandaevents/logos/Auto_Bleue_Logo.png",
+    "width": 1280,
+    "height": 919
+  },
+  {
+    "name": "Coca-Cola",
+    "url": "http://www.the6thscreen.fr/pandaevents/logos/cocacola.jpg",
+    "width": 354,
+    "height": 177
+  },
+  {
+    "name": "Crédit Mutuel",
+    "url": "http://www.the6thscreen.fr/pandaevents/logos/creditmutuel.jpg",
+    "width": 400,
+    "height": 106
+  },
+  {
+    "name": "Brasseries Kronenbourg",
+    "url": "http://www.the6thscreen.fr/pandaevents/logos/Logo_Brasseries_Kronenbourg.png",
+    "width": 439,
+    "height": 319
+  },
+  {
+    "name": "Pepsi",
+    "url": "http://www.the6thscreen.fr/pandaevents/logos/logo-pepsi.jpg",
+    "width": 1024,
+    "height": 398
+  },
+  {
+    "name": "Red-Bull",
+    "url": "http://www.the6thscreen.fr/pandaevents/logos/Red-Bull-logo.jpg",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "name": "UGG",
+    "url": "http://www.the6thscreen.fr/pandaevents/logos/ugg-logo.jpg",
+    "width": 610,
+    "height": 343
+  },
+  {
+    "name": "Volkswagen",
+    "url": "http://www.the6thscreen.fr/pandaevents/logos/Volkswagen_logo.svg",
+    "width": 500,
+    "height": 500
+  }
+]
