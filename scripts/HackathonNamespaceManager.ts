@@ -34,7 +34,7 @@ class HackathonNamespaceManager extends SourceNamespaceManager {
 	constructor(socket : any) {
 		super(socket);
 		this.addListenerToSocket('PublicEvents', this.retrievePublicEvents);
-		this.addListenerToSocket('RetrieveVideoFromJSON', this.retrieveVideoFromJSON);
+		this.addListenerToSocket('VideoFromJSON', this.retrieveVideoFromJSON);
 	}
 
 	retrievePublicEvents(params : any, self : HackathonNamespaceManager = null) {
