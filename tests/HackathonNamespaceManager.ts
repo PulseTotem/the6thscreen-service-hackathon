@@ -12,4 +12,4 @@ describe('HackathonNamespaceManager', function() {
 	it('should always pass', function () {
 		assert.ok(true);
 	});
-});                    jenkins.sh
+});
