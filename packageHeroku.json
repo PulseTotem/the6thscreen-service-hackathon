@@ -1,7 +1,0 @@
-{
-  "name": "service-hackathon",
-  "version": "2.0.1",
-  "devDependencies": {
-    "request": "~2.55.0"
-  }
-}
